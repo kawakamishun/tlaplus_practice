@@ -789,10 +789,127 @@ end process;
 
 ---
 
-### 状態機会
+### 状態機械
 
-#### 
+#### Example
 
+* Door.tla
+  * ドアのopen/close
+* Door2.tla
+  * ドアのopen/close + lock
+* Door3.tla
+  * open/closeとlock/unlockを別のprocessで表現する
+  * State mchineが複雑になった場合に、別々のプロセスに分割することで単純化できる
+    * Doorの例だと現実世界との乖離がある気がするが・・・
+
+* 段階的詳細化 リファインメント
+  * Database.tla
+    * クライアントとDB、データのRWのシンプルな概念のモデル
+  * Database2.tla
+    * DBMS クラサバの構成、DBサーバーへのR/W request、レスポンス受信待機を追加
+      * R requestに対する検証が正しくできない
+        * queryに対する応答結果の検証で、DBのデータを直接参照して検証する場合、データ応答結果と検証時点のDBの状態が変わってる可能性があり、検証不一致になりうる
+  * Database3.tla
+    * 不変条件を検証するために、補助データ（"ゴーストデータ"）を導入して、クライアントのレスポンスの不変条件assertionの検証を行う
+      * ごーすとでーたは、不変条件の検査にのみ使用すること。仕様の振る舞いが変化しないこと
+
+---
+
+### ビジネスロジック
+
+* モデル作成の手順
+* 例: 図書館 書籍の貸出管理システム
+
+#### 要件を定義する
+
+* 標準的セットアップ
+
+  ```tlaplus
+  EXTENDS Integers, TLC, Sequence
+  PT == INSTANCE PT
+  ```
+
+* 定数
+  * 定義域の定数宣言
+
+    ```tlaplus
+    CONSTANTS Peopel, Books, NumCopies
+    ASUUME NumCopies \subseteq Nat
+    ```
+
+  * 本の所蔵数は1冊のみか、複数冊の可能性があるか？
+    * 1冊のみ: `{b \in Books}`
+    * 1冊のみ: `[Books -> NumCopies]`
+
+    ```tlaplus
+    variables
+      library \in [Books -> NumCopies];
+    ```
+
+* 仕様を決める
+  * 本を借りる、本を返却する
+    * 利用者が借りている本
+    * 本を借りるアクション
+    * 本を返却するアクション
+
+* 便利な演算子の追加
+  * 集合への要素の追加、削除
+
+  ```tlaplus
+  set ++ b == set \union {b}
+  set -- b == set \ {b}
+  ```
+
+* processのデザイン
+  * 常に最終的に実行されると想定する -> `fair process`
+
+#### 不変条件を追加する
+
+* 安全性の検査
+  * TLA＋パターン
+    * TypeInvariant
+      * 変数の型を定義する
+        * プロセスのプライベート変数に関する制約を検査する場合は、PlusCal変換結果の下に不変条件を配置する
+
+      ```tlaplus
+      TypeInvariant == 
+        /\ library \in [Books -> NumCopies ++ 0]
+        /\ books \in [People -> SUBSET Books]
+      ```
+
+#### Livenessを追加する
+
+* 時相特性を追加する
+  * 最終的にシステムの目的が達成できること
+  * 例: 利用者が特定の本を読みたいのなら、それらの本は最終的に利用者に貸し出されること
+    * 制約違反: 片方のユーザーのみが同じ本を借り続けることができる
+
+#### 機能仕様の追加
+
+* 例: 予約機能の追加
+  * 予約変数に関するいくつかの疑問
+    * `[Books -> People]` どの本についても一人の利用者しか予約できない、
+      * 未予約の本の表現のためにNULLを導入する？ -> モデルが複雑になる
+      * 他の人が予約しようとしたら、予約できない？あるいは、先行する予約を上書きする？ -> ありえない
+    * `[Books -> SUBSET People]` 複数の利用者が予約できる、順序不問
+      * 未予約の状態 `{} \in SUBSET People` も含む
+      * 最初に予約した人は優先されるべきでしょ
+    * `[Books -> Seq(People)]` 複数の予約者が予約できて、優先順位付き
+  * 例では、最初は2番目で考えてみる
+    * 一人の利用者が予約、借りるを 繰り返すことができてしまう。やはり、予約順の管理は必要だ
+      * 予約表に順序性を持たせよう
+
+* 予約順番管理
+  * 予約リストへの登録を1人1回に制限する
+    * 予約リストへの同一利用者の重複登録は許可しない
+      * 予約表シーケンスの2つのインデックスの値が一致しないことを条件に、Booksをフィルタする
+
+    ```tlaplus
+    NoDuplicateReservations ==
+    \A b \in Books:
+        \A i, j \in 1..Len(reserves[b]):
+            i /= j => reserves[b][i] /= reserves[b][j]
+    ```
 
 ---
 
@@ -803,6 +920,8 @@ end process;
 ```tlaplus
 -------------------------------- MODULE example --------------------------------
 EXTENDS TLC, Sequences, Integers, FiniteSets
+CONSTANTS NULL, NumCopies
+ASSUME NumCopies \subseteq Nat
 PT == INSTANCE PT
 
 (*--algorithm example
