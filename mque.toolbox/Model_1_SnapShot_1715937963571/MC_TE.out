@@ -1,0 +1,225 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.16 of 31 December 2020 (rev: cdddf55)
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 16 and seed -8315836944324914313 with 4 workers on 8 cores with 587MB heap and 1318MB offheap memory [pid: 11900] (Windows 10 10.0 amd64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\tlaplus\workspace\mque.toolbox\Model_1\MC.tla
+Parsing file C:\tlaplus\workspace\mque.toolbox\Model_1\mque.tla
+Parsing file C:\tlaplus\toolbox\plugins\org.lamport.tlatools_1.0.0.202012311918\tla2sany\StandardModules\TLC.tla
+Parsing file C:\tlaplus\toolbox\plugins\org.lamport.tlatools_1.0.0.202012311918\tla2sany\StandardModules\Integers.tla
+Parsing file C:\tlaplus\toolbox\plugins\org.lamport.tlatools_1.0.0.202012311918\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\tlaplus\toolbox\plugins\org.lamport.tlatools_1.0.0.202012311918\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\tlaplus\toolbox\plugins\org.lamport.tlatools_1.0.0.202012311918\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Integers
+Semantic processing of module mque
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2024-05-17 18:26:02)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2024-05-17 18:26:03.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2114:1 @!@!@
+Deadlock reached.
+@!@!@ENDMSG 2114 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ current_message = [r1 |-> "none", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "Read", r2 |-> "Read"]
+/\ queue = <<>>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <Write line 66, col 10 to line 71, col 37 of module mque>
+/\ current_message = [r1 |-> "none", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "Read", r2 |-> "Read"]
+/\ queue = <<"msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+3: <Write line 66, col 10 to line 71, col 37 of module mque>
+/\ current_message = [r1 |-> "none", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "Read", r2 |-> "Read"]
+/\ queue = <<"msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+4: <Write line 66, col 10 to line 71, col 37 of module mque>
+/\ current_message = [r1 |-> "none", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "Read", r2 |-> "Read"]
+/\ queue = <<"msg", "msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+5: <Write line 66, col 10 to line 71, col 37 of module mque>
+/\ current_message = [r1 |-> "none", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "Read", r2 |-> "Read"]
+/\ queue = <<"msg", "msg", "msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+6: <Write line 66, col 10 to line 71, col 37 of module mque>
+/\ current_message = [r1 |-> "none", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "Read", r2 |-> "Read"]
+/\ queue = <<"msg", "msg", "msg", "msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+7: <Read line 75, col 15 to line 81, col 66 of module mque>
+/\ current_message = [r1 |-> "msg", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "NotifyFailure", r2 |-> "Read"]
+/\ queue = <<"msg", "msg", "msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+8: <Write line 66, col 10 to line 71, col 37 of module mque>
+/\ current_message = [r1 |-> "msg", r2 |-> "none"]
+/\ pc = [writer |-> "Write", r1 |-> "NotifyFailure", r2 |-> "Read"]
+/\ queue = <<"msg", "msg", "msg", "msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+9: <Read line 75, col 15 to line 81, col 66 of module mque>
+/\ current_message = [r1 |-> "msg", r2 |-> "msg"]
+/\ pc = [writer |-> "Write", r1 |-> "NotifyFailure", r2 |-> "NotifyFailure"]
+/\ queue = <<"msg", "msg", "msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+10: <Write line 66, col 10 to line 71, col 37 of module mque>
+/\ current_message = [r1 |-> "msg", r2 |-> "msg"]
+/\ pc = [writer |-> "Write", r1 |-> "NotifyFailure", r2 |-> "NotifyFailure"]
+/\ queue = <<"msg", "msg", "msg", "msg", "msg">>
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2024-05-17 18:26:03
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2773:0 @!@!@
+<Init line 59, col 1 to line 59, col 4 of module mque>: 2:2
+@!@!@ENDMSG 2773 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 60, col 9 to line 64, col 75 of module mque: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Write line 66, col 1 to line 66, col 5 of module mque>: 144:359
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 66, col 13 to line 66, col 34 of module mque: 759
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 66, col 13 to line 66, col 24 of module mque: 400
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 67, col 13 to line 67, col 37 of module mque: 359
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 67, col 13 to line 67, col 22 of module mque: 400
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 67, col 26 to line 67, col 37 of module mque: 400
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 13 to line 68, col 41 of module mque: 359
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 69, col 13 to line 69, col 39 of module mque: 359
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 70, col 13 to line 70, col 51 of module mque: 359
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 71, col 13 to line 71, col 37 of module mque: 359
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Read line 75, col 1 to line 75, col 10 of module mque>: 421:1034
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 75, col 18 to line 75, col 34 of module mque: 1302
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 75, col 18 to line 75, col 25 of module mque: 785
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 76, col 18 to line 76, col 30 of module mque: 1086
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 76, col 18 to line 76, col 22 of module mque: 569
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 76, col 27 to line 76, col 30 of module mque: 569
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 77, col 18 to line 77, col 82 of module mque: 517
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 78, col 18 to line 78, col 37 of module mque: 517
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 79, col 18 to line 81, col 66 of module mque: 517
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<NotifyFailure line 83, col 1 to line 83, col 19 of module mque>: 106:202
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 83, col 27 to line 83, col 52 of module mque: 985
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 83, col 27 to line 83, col 34 of module mque: 783
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 84, col 27 to line 84, col 86 of module mque: 202
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 84, col 46 to line 84, col 86 of module mque: 216
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 85, col 27 to line 85, col 51 of module mque: 202
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 85, col 27 to line 85, col 36 of module mque: 216
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 85, col 40 to line 85, col 51 of module mque: 216
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 86, col 27 to line 86, col 69 of module mque: 202
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 87, col 27 to line 87, col 60 of module mque: 202
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(11) at 2024-05-17 18:26:03: 1,585 states generated (66,271 s/min), 672 distinct states found (28,097 ds/min), 281 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+1585 states generated, 672 distinct states found, 281 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 11.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2268:0 @!@!@
+The average outdegree of the complete state graph is 2 (minimum is 0, the maximum 5 and the 95th percentile is 5).
+@!@!@ENDMSG 2268 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 1444ms at (2024-05-17 18:26:03)
+@!@!@ENDMSG 2186 @!@!@
